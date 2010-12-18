@@ -43,6 +43,6 @@ Ctrl-D ends session and continues testing.
         console = code.InteractiveConsole(locals)
         console.interact()
 
-    sys.stdout.write('\nend of DocTest Interactive Console session\n')
+    sys.stdout.write('\nend of Interlude DocTest Interactive Console session\n')
     sys.stdout.write('='*78+'\n')
     sys.stdout = savestdout 
