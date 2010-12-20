@@ -25,4 +25,4 @@ Austria. It is under the `GNU Lesser General Public License (LGPLv3).
 
 - written by `Jens Klein <mailto:jens@bluedynamics.com>`_ 
 
-- IPython support contributed by alanjds 
+- IPython support contributed by `Alan Justino <http://github.com/alanjds>`_ 
