@@ -17,9 +17,10 @@ To make your testrunner interlude aware following is needed:
 License
 =======
 
-`interlude` is copyright 2006-2009 by BlueDynamics Alliance, Klein & Partner KEG,
-Austria. It is under the GNU Lesser General Public License (LGPLv3). 
-http://opensource.org/licenses/lgpl-3.0.html
+`interlude` is copyright 2006-2010 by BlueDynamics Alliance, Klein & Partner KG,
+Austria. It is under the `GNU Lesser General Public License (LGPLv3). 
+<http://opensource.org/licenses/lgpl-3.0.html>`_
 
-written by Jens Klein <jens@bluedynamics.com> 
+- written by `Jens Klein <mailto:jens@bluedynamics.com>`_ 
 
+- IPython support contributed by alanjds 
