@@ -21,6 +21,8 @@ License
 Austria. It is under the `GNU Lesser General Public License (LGPLv3). 
 <http://opensource.org/licenses/lgpl-3.0.html>`_
 
+- code repository at `github collective <http://github.com/collective/interlude>`_
+
 - written by `Jens Klein <mailto:jens@bluedynamics.com>`_ 
 
 - IPython support contributed by alanjds 
