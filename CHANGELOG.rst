@@ -2,6 +2,11 @@
 Changes
 =======
 
+1.1.1
+-----
+
+- fix broken release, include *.rst with MANIFEST.in
+
 1.1
 ---
 
