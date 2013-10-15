@@ -1,3 +1,6 @@
+Interlude - Interactive Doctests
+================================
+
 Provides an interactive shell aka console inside your doctest case.
     
 The console looks exact like in a doctest-case and you can copy and paste
@@ -6,7 +9,7 @@ itself. Its not pdb, it's a python shell.
 
 In your doctest you can invoke the shell at any point by calling::
         
-    >>> interact( locals() )        
+    >>> interact(locals())        
 
 To make your testrunner interlude aware following is needed:
 
@@ -17,7 +20,7 @@ To make your testrunner interlude aware following is needed:
 License
 =======
 
-`interlude` is copyright 2006-2010 by BlueDynamics Alliance, Klein & Partner KG,
+`interlude` is copyright 2006-2013 by BlueDynamics Alliance, Klein & Partner KG,
 Austria. It is under the `GNU Lesser General Public License (LGPLv3). 
 <http://opensource.org/licenses/lgpl-3.0.html>`_
 
@@ -26,3 +29,6 @@ Austria. It is under the `GNU Lesser General Public License (LGPLv3).
 - written by `Jens Klein <mailto:jens@bluedynamics.com>`_ 
 
 - IPython support contributed by `Alan Justino <http://github.com/alanjds>`_ 
+
+- Upgrade/Bugfixes contributed by `Sune Broendum Woeller <https://github.com/sunew>`_
+
