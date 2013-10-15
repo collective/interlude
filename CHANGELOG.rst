@@ -2,6 +2,11 @@
 Changes
 =======
 
+1.2
+---
+
+- make the ipython support work with newer ipython versions. [sunew]
+
 1.1.1
 -----
 
