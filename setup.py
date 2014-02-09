@@ -33,7 +33,7 @@ setup(
         'setuptools',
     ],
     extras_require={
-        'ipython': ['ipython']
+        'ipython': ['ipython>=1.1.0']
     },
     entry_points="",
 )

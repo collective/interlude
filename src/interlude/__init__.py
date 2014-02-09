@@ -10,7 +10,8 @@ import code
 import sys
 
 try:
-    import IPython
+    from IPython.terminal.embed import InteractiveShellEmbed
+    from IPython.config.loader import Config
     HAS_IPYTHON = True
 except ImportError:
     HAS_IPYTHON = False
@@ -21,7 +22,7 @@ Note: You have the same locals available as in your test-case.
 Ctrl-D ends session and continues testing.
 """
 
-def interact(locals=None, use_ipython=True, doctest_prompt=True):
+def interact(locals=None, use_ipython=True, doctest_prompt=True, indent=4):
     """Provides an interactive shell aka console inside your testcase.
 
     It looks exact like in a doctestcase and you can copy and paste
@@ -41,32 +42,25 @@ def interact(locals=None, use_ipython=True, doctest_prompt=True):
 
     doctest_prompt
         use doctest style prompt in ipython (only if module installed)
+
+    indent
+        indent by number of spaces in ipython (only if module installed and if
+        doctest_prompt is true)
     """
     savestdout = sys.stdout
     sys.stdout = sys.stderr
     sys.stderr.write('\n' + '=' * 78)
 
     if use_ipython and HAS_IPYTHON:
-        # from IPython.lib.deepreload import reload as dreload
-        # locals.append(dreload)
-        try:
-            from IPython.Shell import IPShellEmbed
-            ipshell = IPShellEmbed(user_ns=locals)
-            ipshell(argv=ipython_argv)
-        except ImportError:
-            try:
-                from IPython.terminal.embed import InteractiveShellEmbed
-            except ImportError:
-                # not sure if this is needed for bbb
-                from IPython.terminal.frontend.embed import InteractiveShellEmbed
-            from IPython.config.loader import Config
-            cfg = Config()
-            shell_config = cfg.InteractiveShellEmbed
-            shell_config.prompt_in1 = '    >>> '
-            shell_config.prompt_in2 = '    ... '
-            shell_config.prompt_out = '    '
-            ipshell = InteractiveShellEmbed(user_ns=locals, config=cfg)
-            ipshell(BANNER)
+        indent_space = indent * ' '
+        cfg = Config()
+        cfg.TerminalInteractiveShell.confirm_exit = False
+        prompt_config = cfg.PromptManager
+        prompt_cfg.in_template = indent_space + '>>> '
+        prompt_cfg.in2_template = indent_space + '... '
+        prompt_cfg.out_template = indent_space
+        ipshell = InteractiveShellEmbed(user_ns=locals, config=cfg)
+        ipshell(BANNER)
     else:
         sys.stdout.write(BANNER)
         console = code.InteractiveConsole(locals)
