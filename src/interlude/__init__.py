@@ -1,5 +1,5 @@
 #
-# Copyright 2006-2009, BlueDynamics Alliance, Austria - http://bluedynamics.com
+# Copyright 2006-2014, BlueDynamics Alliance, Austria - http://bluedynamics.com
 #
 # GNU Lesser General Public Licence
 
@@ -15,7 +15,7 @@ try:
 except ImportError:
     HAS_IPYTHON = False
 
-def interact(locals=None, use_ipython=True):
+def interact(locals=None, use_ipython=True, ipython_argv=['-classic']):
     """Provides an interactive shell aka console inside your testcase.
 
     It looks exact like in a doctestcase and you can copy and paste
@@ -31,7 +31,7 @@ def interact(locals=None, use_ipython=True):
     """
     savestdout = sys.stdout
     sys.stdout = sys.stderr
-    sys.stderr.write('\n'+'='*78)
+    sys.stderr.write('\n' + '=' * 78)
     sys.stdout.write("""
 Interlude DocTest Interactive Console - (c) BlueDynamics Alliance
 Note: You have the same locals available as in your test-case.
@@ -39,18 +39,20 @@ Ctrl-D ends session and continues testing.
 """)
 
     if use_ipython and HAS_IPYTHON:
+        # from IPython.lib.deepreload import reload as dreload
+        # locals.append(dreload)
         try:
             from IPython.Shell import IPShellEmbed
             ipshell = IPShellEmbed(user_ns=locals)
-            ipshell()
+            ipshell(argv=ipython_argv)
         except ImportError:
             from IPython.frontend.terminal.embed import InteractiveShellEmbed
             ipshell = InteractiveShellEmbed(user_ns=locals)
-            ipshell()
+            ipshell(argv=ipython_argv)
     else:
         console = code.InteractiveConsole(locals)
         console.interact()
 
     sys.stdout.write('\nend of Interlude DocTest Interactive Console session\n')
-    sys.stdout.write('='*78+'\n')
+    sys.stdout.write('=' * 78 + '\n')
     sys.stdout = savestdout

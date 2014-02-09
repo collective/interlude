@@ -2,6 +2,13 @@
 Changes
 =======
 
+1.3
+---
+
+- start ipython shell in classic mode, thus it is easier to copy-paste from
+  the shell to the doctest (save a typing a ``%doctest_mode`` each time.
+  [jensens]
+
 1.2
 ---
 
