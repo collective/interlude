@@ -3,10 +3,6 @@
 #
 # GNU Lesser General Public Licence
 
-__author__ = """Jens Klein <jens@bluedynamics.com>"""
-__docformat__ = 'plaintext'
-
-import code
 import sys
 
 try:
@@ -14,15 +10,20 @@ try:
     from IPython.config.loader import Config
     HAS_IPYTHON = True
 except ImportError:
+    import code
     HAS_IPYTHON = False
 
-BANNER = """
+DELIMITER = '\n' + '=' * 78 + '\n'
+
+START_BANNER = """\
 Interlude DocTest Interactive Console - (c) BlueDynamics Alliance
-Note: You have the same locals available as in your test-case.
+Note: You have the same local variables available as in your test-case.
 Ctrl-D ends session and continues testing.
 """
 
-def interact(locals=None, use_ipython=True, doctest_prompt=True, indent=4):
+END_BANNER = '\nEnd of Interlude DocTest Interactive Console session'
+
+def interact(locals=None, use_ipython=True, doctest_prompt=True):
     """Provides an interactive shell aka console inside your testcase.
 
     It looks exact like in a doctestcase and you can copy and paste
@@ -32,7 +33,7 @@ def interact(locals=None, use_ipython=True, doctest_prompt=True, indent=4):
     In your testcase or doctest you can invoke the shell at any point by
     calling::
 
-        >>> interact( locals() ) #doctest: +SKIP
+        >>> interact( locals() )
 
     locals
         locals available in shell
@@ -42,29 +43,24 @@ def interact(locals=None, use_ipython=True, doctest_prompt=True, indent=4):
 
     doctest_prompt
         use doctest style prompt in ipython (only if module installed)
-
-    indent
-        indent by number of spaces in ipython (only if module installed and if
-        doctest_prompt is true)
     """
     savestdout = sys.stdout
     sys.stdout = sys.stderr
-    sys.stderr.write('\n' + '=' * 78)
-
+    sys.stdout.write(DELIMITER)
     if use_ipython and HAS_IPYTHON:
-        indent_space = indent * ' '
         cfg = Config()
         cfg.TerminalInteractiveShell.confirm_exit = False
-        cfg.PromptManager.in_template = indent_space + '>>> '
-        cfg.PromptManager.in2_template = indent_space + '... '
-        cfg.PromptManager.out_template = indent_space
+        if doctest_prompt:
+            cfg.PromptManager.in_template = u'>>> '
+            cfg.PromptManager.in2_template = u'... '
+            cfg.PromptManager.out_template = u''
+            cfg.PromptManager.justify = False
         ipshell = InteractiveShellEmbed(user_ns=locals, config=cfg)
-        ipshell(BANNER)
+        ipshell(DELIMITER + START_BANNER)
     else:
-        sys.stdout.write(BANNER)
+        sys.stdout.write(START_BANNER + '\n')
         console = code.InteractiveConsole(locals)
         console.interact()
 
-    sys.stdout.write('\nEnd of Interlude DocTest Interactive Console session\n')
-    sys.stdout.write('=' * 78 + '\n')
+    sys.stdout.write(END_BANNER + DELIMITER)
     sys.stdout = savestdout

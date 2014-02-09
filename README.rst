@@ -11,7 +11,9 @@ In your doctest you can invoke the shell at any point by calling::
 
     >>> interact(locals())
 
-To make your testrunner interlude aware following is needed::
+
+To make your testrunner interlude aware, pass ``interact`` as a global to the
+``DocFileSuite`` as shown here::
 
     ...
     import interlude
@@ -19,9 +21,11 @@ To make your testrunner interlude aware following is needed::
     suite = DocFileSuite( ..., globs=dict(interact=interlude.interact), ...)
     ...
 
-If `IPython <http://ipython.org/>`_ is available it opens an IPython prompt (in
-classic mode for a better copy-paste experience).
 
+If `IPython <http://ipython.org/>`_ is available it opens an IPython prompt.
+The prompt is modified and looks like in a doctest. To surpress the
+prompt modifications call ``interact`` with additional kwarg
+``doctest_prompt=False``.
 
 
 License
