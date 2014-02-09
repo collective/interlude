@@ -55,10 +55,9 @@ def interact(locals=None, use_ipython=True, doctest_prompt=True, indent=4):
         indent_space = indent * ' '
         cfg = Config()
         cfg.TerminalInteractiveShell.confirm_exit = False
-        prompt_config = cfg.PromptManager
-        prompt_cfg.in_template = indent_space + '>>> '
-        prompt_cfg.in2_template = indent_space + '... '
-        prompt_cfg.out_template = indent_space
+        cfg.PromptManager.in_template = indent_space + '>>> '
+        cfg.PromptManager.in2_template = indent_space + '... '
+        cfg.PromptManager.out_template = indent_space
         ipshell = InteractiveShellEmbed(user_ns=locals, config=cfg)
         ipshell(BANNER)
     else:
