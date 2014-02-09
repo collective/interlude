@@ -3,6 +3,7 @@
 #
 # GNU Lesser General Public Licence
 
+import code
 import sys
 
 try:
@@ -10,7 +11,6 @@ try:
     from IPython.config.loader import Config
     HAS_IPYTHON = True
 except ImportError:
-    import code
     HAS_IPYTHON = False
 
 DELIMITER = '\n' + '=' * 78 + '\n'

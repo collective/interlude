@@ -2,10 +2,12 @@
 Changes
 =======
 
-1.4 (unreleased)
-----------------
+1.3.1
+-----
 
-- nothing yet
+- refactoring introduced bug: classic prompt ``use_ipython=False`` fails if
+  IPython available
+  [jensens, 2014-02-09]
 
 1.3
 ---
